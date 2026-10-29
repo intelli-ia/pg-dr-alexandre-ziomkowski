@@ -45,11 +45,11 @@ const testimonials: Review[] = [
 ];
 
 function Card({ t }: { t: Review }) {
-  // Depoimentos longos usam fonte menor para caber na altura fixa do card
+  // Depoimentos longos usam fonte menor; os cards se igualam à altura do maior texto, sem cortar nada
   const size = t.quote.length > 300 ? "text-sm sm:text-[15px]" : t.quote.length > 180 ? "text-base" : "text-lg";
   return (
-    <div className="mx-2 flex h-[26rem] w-72 shrink-0 flex-col justify-between rounded-3xl border border-[#21547C]/10 bg-white p-6 sm:mx-3 sm:w-80 sm:p-8">
-      <blockquote className={`overflow-hidden leading-relaxed text-[#21547C]/90 ${size}`}>
+    <div className="mx-2 flex min-h-[20rem] w-72 shrink-0 flex-col justify-between rounded-3xl border border-[#21547C]/10 bg-white p-6 sm:mx-3 sm:w-80 sm:p-8">
+      <blockquote className={`leading-relaxed text-[#21547C]/90 ${size}`}>
         &ldquo;{t.quote}&rdquo;
       </blockquote>
       <div className="mt-5">
