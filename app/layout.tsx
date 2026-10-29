@@ -33,8 +33,7 @@ export const viewport: Viewport = {
   themeColor: "#21547C",
 };
 
-// TODO: informar o ID do GTM desta página (ex.: "GTM-XXXXXXX"); vazio = não carrega
-const GTM_ID = "";
+const GTM_ID = "GTM-5579C8TK";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

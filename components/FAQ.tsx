@@ -32,48 +32,34 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="space-y-3">
+    <div>
       {faqs.map((f, i) => {
         const isOpen = open === i;
         return (
-          <div
-            key={f.q}
-            className={`rounded-2xl border bg-white transition-all duration-300 ${
-              isOpen
-                ? "border-[#54A4D1]/60 shadow-[0_20px_40px_-28px_rgba(33,84,124,0.55)]"
-                : "border-[#21547C]/10 hover:border-[#54A4D1]/50"
-            }`}
-          >
+          <div key={f.q} className="border-b border-[#21547C]/15">
             <button
               type="button"
               id={`faq-btn-${i}`}
               aria-expanded={isOpen}
               aria-controls={`faq-panel-${i}`}
               onClick={() => setOpen(isOpen ? null : i)}
-              className="group flex w-full items-center justify-between gap-4 px-5 py-5 text-left md:px-7"
+              className="group flex w-full items-center justify-between gap-3 py-5 text-left"
             >
-              <span className="font-serif text-lg font-medium leading-snug text-[#21547C] md:text-xl">{f.q}</span>
+              <span className="font-serif text-lg font-medium leading-snug text-[#21547C] transition-colors duration-200 group-hover:text-[#3F8DBB] md:text-xl">
+                {f.q}
+              </span>
               <span
-                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                  isOpen ? "rotate-45 bg-[#21547C] text-white" : "bg-[#EEF6FB] text-[#21547C] group-hover:bg-[#54A4D1] group-hover:text-white"
+                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors duration-200 ${
+                  isOpen ? "bg-[#21547C] text-white" : "bg-[#21547C]/10 text-[#21547C]/70"
                 }`}
               >
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" d={isOpen ? "M5 12h14" : "M12 4v16m8-8H4"} />
                 </svg>
               </span>
             </button>
-            <div
-              id={`faq-panel-${i}`}
-              role="region"
-              aria-labelledby={`faq-btn-${i}`}
-              className={`grid transition-all duration-300 ease-in-out ${
-                isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-              }`}
-            >
-              <div className="overflow-hidden">
-                <p className="px-5 pb-6 text-sm leading-relaxed text-[#35516a] md:px-7 md:text-base">{f.a}</p>
-              </div>
+            <div id={`faq-panel-${i}`} role="region" aria-labelledby={`faq-btn-${i}`} hidden={!isOpen}>
+              <p className="pb-5 text-sm leading-relaxed text-[#35516a] md:text-base">{f.a}</p>
             </div>
           </div>
         );

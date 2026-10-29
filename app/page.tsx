@@ -1,13 +1,52 @@
+import Image from "next/image";
 import CTAButton from "@/components/CTAButton";
-import Counter from "@/components/Counter";
 import FAQ from "@/components/FAQ";
 import Header from "@/components/Header";
-import { Check, Cross, Icon, type IconName } from "@/components/Icons";
-import Photo from "@/components/Photo";
-import Reveal from "@/components/Reveal";
-import SpotCard from "@/components/SpotCard";
+import { Check, Icon, type IconName } from "@/components/Icons";
 import Testimonials from "@/components/Testimonials";
 import { ADDRESS_LINES, CLINIC, IMAGES, MAPS_EMBED, MAPS_URL } from "@/lib/config";
+
+const heroHighlights = [
+  "Atendimento particular e por convênios.",
+  "Da consulta à cirurgia, quando indicada, com o mesmo médico.",
+  "Mais de 200 avaliações no Google e na Doctoralia.",
+];
+
+const areaChips: [string, IconName][] = [
+  ["Urologia do adulto", "user"],
+  ["Urologia infantil", "child"],
+  ["Cálculos renais", "kidney"],
+  ["Próstata", "prostate"],
+  ["Cirurgia robótica", "robot"],
+];
+
+const areas: [string, string, IconName][] = [
+  [
+    "Urologia do adulto",
+    "Avalio sintomas urinários, alterações em exames e dúvidas sobre a saúde urológica. Realizo o acompanhamento clínico e, quando necessário, o tratamento cirúrgico dentro da minha atuação.",
+    "user",
+  ],
+  [
+    "Urologia infantil",
+    "Atendo crianças com fimose, testículo que não desceu, hipospádia e outras condições urológicas. Explico aos responsáveis o que pode ser acompanhado e quando há indicação de tratamento.",
+    "child",
+  ],
+  [
+    "Cálculos renais",
+    "Avalio e trato pedras nos rins. Quando há necessidade de cirurgia, trabalho com procedimentos endoscópicos e laser, conforme as características de cada caso.",
+    "kidney",
+  ],
+  [
+    "Próstata aumentada",
+    "Investigo dificuldades para urinar e outros sintomas relacionados à próstata. Entre os procedimentos que realizo estão RTUP, Rezum e UroLift, com indicação individualizada.",
+    "prostate",
+  ],
+  [
+    "Cirurgia robótica oncológica",
+    "Atuo em cirurgias robóticas para casos selecionados de câncer de próstata, rim e bexiga. Avalio os exames e explico as opções de abordagem cirúrgica.",
+    "robot",
+  ],
+];
 
 const differentials: [string, string, IconName][] = [
   [
@@ -27,55 +66,19 @@ const differentials: [string, string, IconName][] = [
   ],
 ];
 
-const areas: [string, string, IconName, string][] = [
-  [
-    "Urologia do adulto",
-    "Avalio sintomas urinários, alterações em exames e dúvidas sobre a saúde urológica. Realizo o acompanhamento clínico e, quando necessário, o tratamento cirúrgico dentro da minha atuação.",
-    "user",
-    "md:col-span-2",
-  ],
-  [
-    "Urologia infantil",
-    "Atendo crianças com fimose, testículo que não desceu, hipospádia e outras condições urológicas. Explico aos responsáveis o que pode ser acompanhado e quando há indicação de tratamento.",
-    "child",
-    "md:col-span-2",
-  ],
-  [
-    "Cálculos renais",
-    "Avalio e trato pedras nos rins. Quando há necessidade de cirurgia, trabalho com procedimentos endoscópicos e laser, conforme as características de cada caso.",
-    "kidney",
-    "md:col-span-2",
-  ],
-  [
-    "Próstata aumentada",
-    "Investigo dificuldades para urinar e outros sintomas relacionados à próstata. Entre os procedimentos que realizo estão RTUP, Rezum e UroLift, com indicação individualizada.",
-    "prostate",
-    "md:col-span-3",
-  ],
-  [
-    "Cirurgia robótica oncológica",
-    "Atuo em cirurgias robóticas para casos selecionados de câncer de próstata, rim e bexiga. Avalio os exames e explico as opções de abordagem cirúrgica.",
-    "robot",
-    "md:col-span-3",
-  ],
-];
-
-const steps: [string, string, IconName][] = [
-  ["Clique no botão desta página", "Você será direcionado ao WhatsApp da minha equipe.", "click"],
+const steps: [string, string][] = [
+  ["Clique no botão desta página", "Você será direcionado ao WhatsApp da minha equipe."],
   [
     "Converse e confirme seu agendamento",
     "Consulte valores, convênios e horários. Escolha a melhor opção e receba a confirmação do local e da data.",
-    "calendar",
   ],
   [
     "Faça sua avaliação comigo",
     "Na consulta, escuto sua história, avalio os sintomas e os exames disponíveis. Se necessário, solicito exames para complementar a investigação.",
-    "stetho",
   ],
   [
     "Entenda as opções para seu caso",
     "Explico as possibilidades de acompanhamento ou tratamento. Quando há indicação de cirurgia dentro da minha atuação, também posso realizar o procedimento.",
-    "route",
   ],
 ];
 
@@ -92,295 +95,252 @@ export default function Home() {
       <Header />
 
       {/* DOBRA 01 — HERO */}
-      <section id="hero" className="relative overflow-hidden bg-white pb-28 pt-12 md:pb-36 md:pt-20">
-        <div className="drift pointer-events-none absolute -right-48 -top-40 h-[620px] w-[620px] rounded-full bg-[#54A4D1]/20 blur-3xl" />
-        <div className="drift pointer-events-none absolute -bottom-48 -left-40 h-[520px] w-[520px] rounded-full bg-[#21547C]/10 blur-3xl [animation-delay:-6s]" />
-        <Cross className="float-slow pointer-events-none absolute left-[5%] top-24 hidden w-5 text-[#54A4D1]/60 md:block" />
-        <Cross className="float-slow pointer-events-none absolute bottom-48 right-[44%] hidden w-4 text-[#21547C]/20 [animation-delay:-3s] md:block" />
-
-        <div className="relative mx-auto grid grid-cols-[minmax(0,1fr)] w-full max-w-6xl gap-12 px-6 md:grid-cols-12 md:items-stretch md:gap-x-16 md:gap-y-10 lg:gap-x-24">
-          <div className="order-2 md:order-1 md:col-span-7">
-            <Reveal>
-              <h1 className="type-hero font-serif font-medium italic text-[#21547C]">
-                Urologista em Salvador para adultos e crianças.
-              </h1>
-              <div className="my-7 h-[3px] w-20 rounded-full bg-gradient-to-r from-[#54A4D1] to-[#21547C]" />
-              <h2 className="max-w-xl text-base font-light leading-relaxed text-[#35516a] md:text-lg">
-                Avalio seu caso, explico as opções de tratamento e, quando indicada, também realizo sua cirurgia. Você
-                pode seguir com o mesmo médico, da consulta ao tratamento cirúrgico.
-              </h2>
-              <p className="mt-4 flex items-start gap-2.5 text-sm font-medium text-[#21547C]">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#54A4D1]" />
-                Atendimento particular e por convênios. Consulte seu plano com a equipe.
-              </p>
-              <div className="mt-9">
-                <CTAButton size="lg" />
-              </div>
-              <p className="mt-5 text-xs tracking-wide text-[#35516a]/80">CRM-BA 25959 · RQE 20028</p>
-            </Reveal>
+      <section id="hero" className="relative flex min-h-screen items-center overflow-hidden bg-[#21547C] text-white">
+        <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-6 pb-32 pt-8 md:grid-cols-12 md:items-stretch md:gap-x-16 md:gap-y-8 md:py-24">
+          <div className="order-first md:col-span-7 md:col-start-1 md:row-start-1">
+            <Image
+              src="/logo-negativo.svg"
+              alt="Alexandre Ziomkowski, cirurgia urológica"
+              width={1759}
+              height={418}
+              className="h-11 w-auto md:h-14"
+            />
+          </div>
+          <div className="order-2 md:order-1 md:col-span-7 md:col-start-1 md:row-start-2">
+            <h1 className="font-serif type-section font-medium">
+              Urologista em Salvador <span className="italic text-[#9ACBE8]">para adultos e crianças.</span>
+            </h1>
+            <div className="my-6 h-px w-24 bg-[#9ACBE8]" />
+            <h2 className="max-w-xl text-base font-light leading-relaxed text-white/90 md:text-lg">
+              Avalio seu caso, explico as opções de tratamento e, quando indicada, também realizo sua cirurgia. Você
+              pode seguir com o mesmo médico, da consulta ao tratamento cirúrgico.
+            </h2>
+            <ul className="mt-6 space-y-3">
+              {heroHighlights.map((h) => (
+                <li key={h} className="flex items-start gap-3 text-sm text-white/90 md:text-base">
+                  <Check className="mt-1 h-4 w-4 shrink-0 text-[#9ACBE8]" />
+                  {h}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-9 grid gap-4 md:w-[90%]">
+              <CTAButton full variant="light" />
+              <CTAButton full variant="outline" label="Saiba mais" href="#depoimentos" external={false} icon="arrow" />
+            </div>
+            <p className="mt-6 text-xs tracking-wide text-white/70">CRM-BA 25959 · RQE 20028</p>
           </div>
 
-          <div className="order-1 md:order-2 md:col-span-5 md:h-full">
-            <Reveal delay={150} className="md:h-full">
-              <div className="relative mx-auto w-[72%] max-w-sm md:h-full md:w-full md:max-w-md">
-                <div className="absolute -bottom-4 -right-4 left-4 top-4 rounded-t-[999px] rounded-b-[2rem] border border-[#54A4D1]/70" />
-                <div className="relative aspect-[4/5] overflow-hidden md:aspect-auto md:h-full md:min-h-[28rem] rounded-t-[999px] rounded-b-[2rem] bg-[#EEF6FB] shadow-[0_40px_80px_-30px_rgba(33,84,124,0.55)]">
-                  <Photo
-                    src={IMAGES.hero}
-                    className="object-[50%_12%]"
-                    alt="Dr. Alexandre Ziomkowski, urologista em Salvador, em seu consultório"
-                    priority
-                    sizes="(min-width: 768px) 40vw, 82vw"
-                    hint="Foto do Dr. Alexandre no consultório"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#21547C]/25 via-transparent to-transparent" />
-                </div>
-                <div className="float-slow absolute -left-4 bottom-12 z-10 flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-[0_20px_40px_-18px_rgba(33,84,124,0.55)] backdrop-blur md:-left-10">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#21547C] text-white">
-                    <Icon name="star" className="h-5 w-5" />
-                  </span>
-                  <span className="leading-tight">
-                    <span className="block font-serif text-xl italic text-[#21547C]">+200</span>
-                    <span className="block text-[11px] text-[#35516a]">avaliações de pacientes</span>
-                  </span>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-
-        {/* Faixa de autoridade */}
-        <Reveal delay={200} className="relative mx-auto mt-16 w-full max-w-6xl px-6 md:mt-20">
-          <div className="grain relative grid grid-cols-[minmax(0,1fr)] overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#21547C] to-[#173d5c] text-white shadow-[0_40px_80px_-40px_rgba(33,84,124,0.9)] md:grid-cols-3">
-            {[
-              { icon: "star" as IconName, big: <Counter to={200} />, text: "avaliações no Google e na Doctoralia." },
-              {
-                icon: "award" as IconName,
-                big: <span className="font-serif italic">CETEC/Einstein</span>,
-                text: "Certificação em cirurgia robótica.",
-              },
-              {
-                icon: "robot" as IconName,
-                big: <Counter to={2000} />,
-                text: "procedimentos robóticos urológicos realizados pela equipe da qual faço parte.",
-              },
-            ].map((s, i) => (
-              <div
-                key={s.text}
-                className={`relative flex items-center gap-5 px-7 py-7 md:flex-col md:items-start md:gap-3 md:px-9 md:py-9 ${
-                  i > 0 ? "border-t border-white/12 md:border-l md:border-t-0" : ""
-                }`}
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-[#54A4D1]">
-                  <Icon name={s.icon} className="h-7 w-7" />
-                </span>
-                <div>
-                  <div className="font-serif text-3xl font-medium md:text-4xl">{s.big}</div>
-                  <p className="mt-1 text-sm leading-snug text-white/80">{s.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </section>
-
-      {/* DOBRA 02 — DEPOIMENTOS */}
-      <section
-        id="depoimentos"
-        className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#EEF6FB] pb-40 pt-20 md:pb-44 md:pt-28"
-      >
-        <Cross className="float-slow pointer-events-none absolute left-[8%] top-16 w-5 text-[#54A4D1]/50" />
-        <Cross className="float-slow pointer-events-none absolute right-[10%] top-24 w-4 text-[#21547C]/20 [animation-delay:-2s]" />
-        <Reveal className="mb-12 px-6 text-center md:mb-16">
-          <h2 className="mx-auto max-w-4xl font-serif type-section font-medium text-[#21547C]">
-            Quem já passou por consulta <span className="hl">fala por mim</span>
-          </h2>
-        </Reveal>
-        <Testimonials />
-      </section>
-
-      {/* DOBRA 03 — POR QUE CONSULTAR COMIGO */}
-      <section
-        id="diferenciais"
-        className="grain relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#21547C] pb-44 pt-24 text-white md:pb-52 md:pt-32"
-      >
-        <div className="drift pointer-events-none absolute -left-40 top-20 h-[460px] w-[460px] rounded-full bg-[#54A4D1]/25 blur-3xl" />
-        <Cross className="float-slow pointer-events-none absolute right-[6%] top-28 w-5 text-[#54A4D1]/70" />
-        <div className="relative mx-auto grid grid-cols-[minmax(0,1fr)] max-w-6xl gap-14 px-6 md:grid-cols-12 md:items-stretch md:gap-x-16 md:gap-y-12 lg:gap-x-24">
-          <Reveal className="md:col-span-5 md:h-full">
-            <div className="relative mx-auto max-w-sm md:h-full md:max-w-none">
-              <div className="absolute -bottom-4 -left-4 right-4 top-4 rounded-t-[999px] rounded-b-[2rem] border border-[#54A4D1]/70" />
-              <div className="relative aspect-[4/5] overflow-hidden md:aspect-auto md:h-full md:min-h-[28rem] rounded-t-[999px] rounded-b-[2rem] bg-[#173d5c] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)]">
-                <Photo
-                  src={IMAGES.consulta}
-                  className="object-[50%_12%]"
-                  alt="Dr. Alexandre Ziomkowski em consulta com paciente"
-                  sizes="(min-width: 768px) 40vw, 90vw"
-                  hint="Foto do Dr. Alexandre em consulta"
+          <div className="order-1 md:order-2 md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-1 md:h-full">
+            <div className="relative mx-auto w-[80%] max-w-sm md:h-full md:w-full md:max-w-md">
+              <div className="absolute -bottom-4 -right-4 left-4 top-4 rounded-t-[999px] rounded-b-[2rem] border border-[#9ACBE8]/60" />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[2rem] bg-[#173d5c] md:aspect-auto md:h-full md:min-h-[28rem]">
+                <Image
+                  src={IMAGES.hero}
+                  unoptimized
+                  alt="Dr. Alexandre Ziomkowski, urologista em Salvador, caminhando pelo corredor da clínica"
+                  fill
+                  preload
+                  fetchPriority="high"
+                  sizes="(min-width: 768px) 40vw, 80vw"
+                  className="object-cover object-[50%_50%]"
                 />
               </div>
             </div>
-          </Reveal>
+          </div>
+        </div>
+      </section>
 
-          <div className="md:col-span-7">
-            <Reveal>
-              <h2 className="font-serif type-section font-medium">
-                Entenda seu caso <span className="italic text-[#54A4D1]">antes de decidir</span> o tratamento.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-white/80 md:text-lg">
-                Um exame alterado, um sintoma ou uma preocupação com seu filho podem trazer muitas dúvidas. Meu
-                trabalho é avaliar o que está acontecendo e explicar as possibilidades de cuidado.
-              </p>
-            </Reveal>
-
-            <div className="mt-9 space-y-4">
-              {differentials.map(([t, d, icon], i) => (
-                <Reveal key={t} delay={i * 90}>
-                  <SpotCard className="flex gap-5 rounded-3xl border border-white/12 bg-white/[0.06] p-6 backdrop-blur transition duration-500 hover:-translate-y-1 hover:border-[#54A4D1]/50 md:p-7">
-                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#54A4D1] text-white">
-                      <Icon name={icon} className="h-8 w-8" />
-                    </span>
-                    <div>
-                      <h3 className="font-serif type-card font-medium">{t}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-white/80 md:text-base">{d}</p>
-                    </div>
-                  </SpotCard>
-                </Reveal>
+      {/* DOBRA 02 — DEPOIMENTOS */}
+      <section id="depoimentos" className="relative overflow-hidden bg-[#DDEBF5] pb-40 pt-20 md:pb-44 md:pt-28">
+        <div className="mx-auto mb-14 flex max-w-4xl flex-col items-center gap-3 px-6 md:mb-20">
+          {[areaChips.slice(0, 3), areaChips.slice(3)].map((row, r) => (
+            <div key={r} className="flex flex-wrap items-center justify-center gap-3">
+              {row.map(([label, icon]) => (
+                <span
+                  key={label}
+                  className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#21547C] md:text-base"
+                >
+                  <Icon name={icon} className="h-6 w-6" />
+                  {label}
+                </span>
               ))}
             </div>
+          ))}
+        </div>
+        <div className="mb-8 px-6 text-center md:mb-10">
+          <h2 className="mx-auto max-w-5xl font-serif type-section font-medium text-[#21547C]">
+            Quem já passou por consulta <span className="italic text-[#3F8DBB]">fala por mim</span>
+          </h2>
+          <div className="mx-auto mt-5 h-px w-24 bg-[#3F8DBB]" />
+          <p className="mx-auto mt-4 max-w-xl leading-relaxed text-[#35516a]">
+            Conheça a experiência de pacientes e famílias que confiaram o cuidado a mim.
+          </p>
+        </div>
+        <div className="mb-8 px-6 md:mb-10">
+          <p className="mx-auto w-fit max-w-full rounded-full bg-white px-6 py-3 text-center text-sm text-[#35516a]">
+            <strong className="font-semibold text-[#21547C]">+200 avaliações</strong> de pacientes no Google e na
+            Doctoralia
+          </p>
+        </div>
+        <Testimonials />
+      </section>
 
-            <Reveal delay={200} className="mt-10">
-              <CTAButton variant="light" label="Agendar minha avaliação pelo WhatsApp" />
-            </Reveal>
+      {/* DOBRA 03 — CONEXÃO */}
+      <section className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#21547C] pb-44 pt-24 text-white md:pb-52 md:pt-32">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <h2 className="font-serif type-section font-medium">
+            Entenda seu caso <span className="italic text-[#9ACBE8]">antes de decidir</span> o tratamento.
+          </h2>
+          <div className="mx-auto my-7 h-px w-24 bg-[#9ACBE8]" />
+          <div className="space-y-4 text-base leading-[1.7] text-white/85 md:text-lg">
+            <p>
+              Um exame alterado, um sintoma ou uma preocupação com seu filho podem trazer muitas dúvidas. Meu trabalho
+              é avaliar o que está acontecendo e explicar as possibilidades de cuidado.
+            </p>
+            <p>
+              Sei que uma consulta pode começar com receio de um exame, preocupação com um diagnóstico ou dúvidas sobre
+              a saúde de um filho. Por isso, procuro ouvir com atenção e explicar cada orientação com calma.
+            </p>
+            <p className="mt-8 border-t border-white/20 pt-8 font-serif text-xl italic leading-snug text-[#9ACBE8] md:text-2xl">
+              No consultório, quero que você se sinta à vontade para perguntar e conversar sobre o que preocupa.
+            </p>
+          </div>
+          <div className="mt-9">
+            <CTAButton variant="light" />
           </div>
         </div>
       </section>
 
       {/* DOBRA 04 — ÁREAS DE ATUAÇÃO */}
-      <section
-        id="areas"
-        className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-white pb-40 pt-20 md:pb-44 md:pt-28"
-      >
-        <div className="drift pointer-events-none absolute -right-40 top-10 h-[420px] w-[420px] rounded-full bg-[#54A4D1]/15 blur-3xl" />
-        <div className="relative mx-auto max-w-6xl px-6">
-          <Reveal className="mb-12 max-w-3xl">
+      <section id="areas" className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#DDEBF5] pb-40 pt-20 md:pb-44 md:pt-28">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-12 max-w-3xl">
             <h2 className="font-serif type-section font-medium text-[#21547C]">
-              Consultas e tratamentos urológicos para <span className="hl">adultos e crianças.</span>
+              Consultas e tratamentos urológicos para <span className="italic">adultos e crianças</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#35516a] md:text-lg">
               Conheça algumas das questões que avalio e trato. A consulta permite entender seu caso e definir as
               possibilidades de acompanhamento ou tratamento.
             </p>
-          </Reveal>
-
-          <div className="grid grid-cols-[minmax(0,1fr)] gap-5 md:grid-cols-6">
-            {areas.map(([t, d, icon, span], i) => (
-              <Reveal key={t} delay={(i % 3) * 80} className={span}>
-                <SpotCard className="group h-full rounded-3xl border border-[#21547C]/10 bg-[#EEF6FB] p-8 transition duration-500 hover:-translate-y-1.5 hover:border-[#54A4D1]/60 hover:shadow-[0_30px_60px_-30px_rgba(33,84,124,0.5)]">
-                  <div className="flex items-start justify-between">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-[#21547C] shadow-sm transition duration-500 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-[#21547C] group-hover:text-white">
-                      <Icon name={icon} className="h-9 w-9" />
-                    </span>
-                    <span className="font-serif text-3xl italic text-[#54A4D1]/60">0{i + 1}</span>
-                  </div>
-                  <h3 className="mt-6 font-serif type-card font-medium text-[#21547C]">{t}</h3>
-                  <p className="mt-2.5 leading-relaxed text-[#35516a]">{d}</p>
-                </SpotCard>
-              </Reveal>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {areas.map(([t, d, icon], i) => (
+              <article
+                key={t}
+                className={`h-full rounded-3xl border border-[#C5DAE9] bg-[#EEF6FB] p-9 text-center md:text-left ${
+                  i === areas.length - 1 && areas.length % 2 === 1 ? "md:col-span-2" : ""
+                }`}
+              >
+                <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#C9E1F1] text-[#21547C] md:mx-0">
+                  <Icon name={icon} className="h-10 w-10" />
+                </span>
+                <h3 className="mt-5 font-serif type-card font-medium text-[#21547C]">{t}</h3>
+                <p className="mt-2 leading-relaxed text-[#35516a]">{d}</p>
+              </article>
             ))}
           </div>
-
-          <Reveal className="mt-12 text-center">
+          <div className="mt-12 text-center">
             <CTAButton />
-          </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* DOBRA 04b — DIFERENCIAIS */}
+      <section
+        id="diferenciais"
+        className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#21547C] pb-44 pt-24 text-white md:pb-52 md:pt-28"
+      >
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-serif type-section font-medium">
+              Da consulta ao tratamento, <span className="italic text-[#9ACBE8]">com o mesmo médico</span>
+            </h2>
+            <div className="mx-auto my-7 h-px w-24 bg-[#9ACBE8]" />
+            <p className="text-base leading-[1.7] text-white/90 md:text-lg">
+              Avalio seu caso, explico as opções de tratamento e, quando indicada, também realizo sua cirurgia.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {differentials.map(([t, d, icon]) => (
+              <article key={t} className="h-full rounded-3xl border border-[#3E78A3] bg-[#2B6089] p-8 text-center md:text-left">
+                <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#9ACBE8] text-[#21547C] md:mx-0">
+                  <Icon name={icon} className="h-10 w-10" />
+                </span>
+                <h3 className="mt-5 font-serif type-card font-medium">{t}</h3>
+                <p className="mt-2 leading-relaxed text-white/80">{d}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <CTAButton variant="light" label="Agendar minha avaliação pelo WhatsApp" />
+          </div>
         </div>
       </section>
 
       {/* DOBRA 05 — COMO FUNCIONA O ATENDIMENTO */}
-      <section
-        id="como-funciona"
-        className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#EEF6FB] pb-44 pt-24 md:pb-52 md:pt-28"
-      >
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal className="mb-14 max-w-3xl">
+      <section id="como-funciona" className="relative -mt-16 rounded-t-[4rem] bg-[#EEF6FB] pb-40 pt-20 md:pb-44 md:pt-28">
+        <div className="mx-auto mb-12 max-w-6xl px-6">
+          <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-serif type-section font-medium text-[#21547C]">
-              Veja como é <span className="hl">fácil marcar</span> sua consulta.
+              Veja como é <span className="italic text-[#3F8DBB]">fácil marcar</span> sua consulta.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#35516a] md:text-lg">
               Minha equipe está disponível no WhatsApp 24 horas por dia, todos os dias. Você tira suas dúvidas e agenda
               sua consulta diretamente pela conversa.
             </p>
-          </Reveal>
-
-          <ol className="relative grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-4">
-            <span
-              aria-hidden
-              className="absolute left-[12%] right-[12%] top-[2.1rem] hidden h-px border-t-2 border-dashed border-[#54A4D1]/60 md:block"
-            />
-            {steps.map(([t, d, icon], i) => (
-              <Reveal key={t} delay={i * 100}>
-                <li className="relative h-full rounded-3xl bg-white p-7 shadow-[0_24px_50px_-34px_rgba(33,84,124,0.5)] transition duration-500 hover:-translate-y-1.5">
-                  <div className="relative z-10 mb-5 flex items-center gap-3">
-                    <span className="flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full bg-[#21547C] font-serif text-xl italic text-white ring-8 ring-[#EEF6FB]">
-                      {i + 1}
-                    </span>
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#EEF6FB] text-[#21547C]">
-                      <Icon name={icon} className="h-7 w-7" />
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-xl font-medium leading-snug text-[#21547C]">{t}</h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-[#35516a] md:text-[15px]">{d}</p>
-                </li>
-              </Reveal>
+          </div>
+        </div>
+        <div className="mx-auto max-w-3xl px-6">
+          <ol className="relative">
+            {steps.map(([t, d], i) => (
+              <li key={t} className={`relative flex gap-5 md:gap-8 ${i < steps.length - 1 ? "pb-10" : ""}`}>
+                {i < steps.length - 1 && (
+                  <span className="absolute left-[19px] top-10 h-[calc(100%-2.5rem)] w-px bg-[#3F8DBB]/40" aria-hidden />
+                )}
+                <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#21547C] bg-[#EEF6FB] text-sm font-semibold text-[#21547C]">
+                  {i + 1}
+                </span>
+                <div className="pt-1">
+                  <h3 className="font-serif type-card font-medium text-[#21547C]">{t}</h3>
+                  <p className="mt-2 leading-relaxed text-[#35516a]">{d}</p>
+                </div>
+              </li>
             ))}
           </ol>
-
-          <Reveal className="mt-12 text-center">
+          <div className="mt-12 text-center">
             <CTAButton />
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* DOBRA 06 — SOBRE O DR. ALEXANDRE */}
-      <section
-        id="sobre"
-        className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-white pb-40 pt-20 md:pb-44 md:pt-28"
-      >
-        <div className="mx-auto grid grid-cols-[minmax(0,1fr)] max-w-6xl gap-16 px-6 md:grid-cols-12 md:items-stretch md:gap-x-16 md:gap-y-14 lg:gap-x-24">
-          <Reveal className="md:col-span-5 md:h-full">
+      <section id="sobre" className="relative -mt-16 overflow-hidden bg-[#DDEBF5] pb-40 pt-20 md:pb-44 md:pt-28">
+        <div className="mx-auto grid max-w-6xl gap-16 px-6 md:grid-cols-12 md:items-stretch md:gap-x-16 md:gap-y-14">
+          <div className="order-2 md:order-none md:col-span-5 md:h-full">
             <div className="relative mx-auto max-w-sm md:h-full md:max-w-none">
-              <div className="absolute -bottom-4 -right-4 left-4 top-4 rounded-t-[999px] rounded-b-[2rem] border border-[#54A4D1]/70" />
-              <div className="absolute -left-6 -top-6 h-28 w-28 rounded-full bg-[#54A4D1]/30 blur-2xl" />
-              <div className="relative aspect-[4/5] overflow-hidden md:aspect-auto md:h-full md:min-h-[28rem] rounded-t-[999px] rounded-b-[2rem] bg-[#EEF6FB] shadow-[0_40px_80px_-30px_rgba(33,84,124,0.55)]">
-                <Photo
-                  src={IMAGES.sobre}
-                  alt="Dr. Alexandre Ziomkowski, médico urologista"
+              <div className="absolute -bottom-4 -right-4 left-4 top-4 rounded-t-[999px] rounded-b-[2rem] border border-[#3F8DBB]/60" />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[2rem] bg-[#21547C] md:aspect-auto md:h-full md:min-h-[28rem]">
+                <Image
+                  src={IMAGES.about}
+                  unoptimized
+                  alt="Dr. Alexandre Ziomkowski, médico urologista, na recepção do consultório"
+                  fill
                   sizes="(min-width: 768px) 40vw, 90vw"
-                  className="object-[50%_12%] transition-transform duration-[1500ms] ease-out hover:scale-105"
-                  hint="Foto acolhedora do Dr. Alexandre"
+                  className="object-cover object-[50%_20%]"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#21547C]/30 via-transparent to-transparent" />
               </div>
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#21547C] px-6 py-3 text-sm font-medium text-white shadow-xl md:-right-6 md:left-auto md:translate-x-0">
-                <span className="font-serif text-2xl italic text-[#54A4D1]">+2.000</span> procedimentos robóticos na equipe
+              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#21547C] px-6 py-3 text-sm font-medium text-white shadow-lg md:-left-6 md:translate-x-0">
+                <span className="font-serif text-2xl italic text-[#9ACBE8]">+2.000</span> procedimentos robóticos na equipe
               </div>
             </div>
-          </Reveal>
-
-          <Reveal delay={150} className="md:col-span-7">
+          </div>
+          <div className="md:col-span-7">
             <h2 className="font-serif type-section font-medium text-[#21547C]">
-              Conheça o <span className="hl">Dr. Alexandre Ziomkowski.</span>
+              Conheça o Dr. Alexandre Ziomkowski, <span className="italic">urologista em Salvador</span>
             </h2>
-            <p className="mt-3 text-sm font-medium tracking-wide text-[#54A4D1]">
-              <span className="text-[#21547C]">Médico urologista · CRM-BA 25959 · RQE 20028</span>
-            </p>
-            <div className="my-6 h-px w-16 bg-[#54A4D1]" />
+            <div className="my-6 h-px w-16 bg-[#3F8DBB]" />
             <div className="space-y-4 text-base leading-[1.7] text-[#35516a] md:text-lg">
-              <p>
-                Sou médico urologista e cirurgião, com atendimento de adultos e crianças em Salvador. Sei que uma
-                consulta pode começar com receio de um exame, preocupação com um diagnóstico ou dúvidas sobre a saúde
-                de um filho. Por isso, procuro ouvir com atenção e explicar cada orientação com calma.
-              </p>
+              <p>Sou médico urologista e cirurgião, com atendimento de adultos e crianças em Salvador.</p>
               <p>
                 Minha formação começou em Medicina na Universidade Federal da Bahia. Depois, fiz residência em Cirurgia
                 Geral no Hospital Universitário Professor Edgard Santos e em Urologia no Hospital São Rafael, da Rede
@@ -392,15 +352,14 @@ export default function Home() {
                 preceptor em urologia e cirurgia robótica.
               </p>
               <p>
-                No consultório, quero que você se sinta à vontade para perguntar e conversar sobre o que preocupa.
-                Quando atendo uma criança, esse cuidado inclui acolher a família e ajudá-la a compreender os próximos
+                Quando atendo uma criança, o cuidado inclui acolher a família e ajudá-la a compreender os próximos
                 passos.
               </p>
             </div>
 
-            <ul className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {formation.map(([t, d]) => (
-                <li key={t} className="flex items-start gap-3 rounded-2xl border border-[#21547C]/10 bg-[#EEF6FB] p-4">
+                <li key={t} className="flex items-start gap-3 rounded-2xl border border-[#C5DAE9] bg-[#EEF6FB] p-4">
                   <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#21547C] text-white">
                     <Check className="h-3.5 w-3.5" />
                   </span>
@@ -412,45 +371,49 @@ export default function Home() {
               ))}
             </ul>
 
-            <div className="mt-9">
+            <p className="mt-8 text-center font-serif text-2xl text-[#21547C] md:text-left">Dr. Alexandre Ziomkowski</p>
+            <p className="text-center text-sm tracking-wide text-[#35516a] md:text-left">
+              Médico urologista · CRM-BA 25959 | RQE 20028
+            </p>
+            <div className="mt-8 text-center md:text-left">
               <CTAButton />
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* DOBRA 07 — LOCALIZAÇÃO */}
       <section
         id="localizacao"
-        className="grain relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#21547C] pb-44 pt-24 text-white md:pb-52 md:pt-28"
+        className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#21547C] pb-44 pt-24 text-white md:pb-52 md:pt-28"
       >
-        <div className="drift pointer-events-none absolute -right-40 top-10 h-[460px] w-[460px] rounded-full bg-[#54A4D1]/25 blur-3xl" />
         <div className="relative mx-auto max-w-6xl px-6">
-          <Reveal className="mx-auto mb-12 max-w-3xl text-center md:mx-0 md:text-left">
+          <div className="mx-auto mb-12 max-w-3xl text-center md:mx-0 md:text-left">
             <h2 className="font-serif type-section font-medium">
-              Sua consulta com <span className="italic text-[#54A4D1]">urologista em Salvador.</span>
+              Sua consulta com <span className="italic text-[#9ACBE8]">urologista em Salvador.</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/80 md:text-lg">
               Atendo adultos e crianças na {CLINIC}, na região da Garibaldi. Minha equipe confirma o local e os detalhes
               do atendimento ao agendar sua consulta pelo WhatsApp.
             </p>
-          </Reveal>
+          </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-12">
-            <Reveal className="md:col-span-6">
+          <div className="grid gap-6 md:grid-cols-12">
+            <div className="md:col-span-6">
               <div className="flex h-full flex-col gap-6">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-[#173d5c] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
-                  <Photo
-                    src={IMAGES.clinica}
-                    className="object-[50%_62%]"
-                    alt={`Fachada e recepção da ${CLINIC}`}
+                <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-[#173d5c]">
+                  <Image
+                    src={IMAGES.clinic}
+                    unoptimized
+                    alt={`Fachada do prédio da ${CLINIC}, no Centro Empresarial Garibaldi`}
+                    fill
                     sizes="(min-width: 768px) 38vw, 90vw"
-                    hint="Foto da clínica"
+                    className="object-cover object-[50%_78%]"
                   />
                 </div>
-                <SpotCard className="rounded-3xl border border-white/12 bg-white/[0.06] p-4 backdrop-blur sm:p-7">
+                <div className="rounded-3xl border border-[#3E78A3] bg-[#2B6089] p-4 sm:p-7">
                   <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-start md:gap-4 md:text-left">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#54A4D1] text-white">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#9ACBE8] text-[#21547C]">
                       <Icon name="pin" className="h-7 w-7" />
                     </span>
                     <address className="not-italic">
@@ -466,91 +429,77 @@ export default function Home() {
                   </div>
                   <div className="mt-6 flex flex-col gap-3 sm:mt-7">
                     <CTAButton full variant="light" label="Agendar minha consulta pelo WhatsApp" />
-                    <CTAButton full variant="outlineLight" label="Ver como chegar" href={MAPS_URL} icon="arrow" />
+                    <CTAButton full variant="outline" label="Ver como chegar" href={MAPS_URL} icon="arrow" />
                   </div>
-                </SpotCard>
+                </div>
               </div>
-            </Reveal>
+            </div>
 
-            <Reveal delay={150} className="md:col-span-6">
+            <div className="md:col-span-6">
               <iframe
                 title={`Mapa da ${CLINIC} em Salvador`}
                 src={MAPS_EMBED}
                 loading="lazy"
-                className="h-96 w-full rounded-3xl border-0 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] md:h-full md:min-h-[26rem]"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="h-96 w-full rounded-3xl border-0 md:h-full md:min-h-[26rem]"
               />
-            </Reveal>
+            </div>
           </div>
         </div>
       </section>
 
       {/* DOBRA 08 — PERGUNTAS FREQUENTES */}
-      <section
-        id="faq"
-        className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#EEF6FB] pb-40 pt-24 md:pb-44 md:pt-28"
-      >
-        <div className="mx-auto flex max-w-6xl flex-col gap-12 px-6 md:flex-row md:gap-16">
-          <Reveal className="shrink-0 md:w-[46%]">
-            <div className="flex flex-col gap-7 md:sticky md:top-28">
-              <div>
-                <h2 className="font-serif type-section font-medium text-[#21547C]">
-                  Tire suas dúvidas <span className="hl">antes de agendar.</span>
-                </h2>
+      <section id="faq" className="relative -mt-16 rounded-t-[4rem] bg-white pb-40 pt-24 text-[#21547C] md:pb-44 md:pt-28">
+        <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 md:flex-row md:gap-20">
+          <div className="shrink-0 md:w-1/3">
+            <div className="flex flex-col gap-6 md:sticky md:top-28 md:w-fit">
+              <h2 className="text-center font-serif type-sub font-medium text-[#21547C] md:max-w-[7.9em] md:text-left">
+                Tire suas dúvidas antes de agendar
+              </h2>
+              <div className="text-center md:text-left">
+                <CTAButton full size="sm" variant="green" label="Tirar dúvidas pelo WhatsApp" />
               </div>
-              <CTAButton full label="Tirar dúvidas e agendar pelo WhatsApp" />
             </div>
-          </Reveal>
-          <Reveal delay={100} className="md:flex-1">
+          </div>
+          <div className="md:flex-1">
             <FAQ />
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* DOBRA 09 — CTA FINAL */}
-      <section
-        id="contato"
-        className="grain relative -mt-16 overflow-hidden rounded-t-[4rem] bg-gradient-to-br from-[#21547C] via-[#1c4a6e] to-[#173d5c] pb-24 pt-24 text-white md:pb-28 md:pt-32"
-      >
-        <div className="drift pointer-events-none absolute -left-32 -top-20 h-[480px] w-[480px] rounded-full bg-[#54A4D1]/30 blur-3xl" />
-        <Cross className="float-slow pointer-events-none absolute right-[8%] top-24 w-6 text-[#54A4D1]/70" />
-        <Cross className="float-slow pointer-events-none absolute bottom-32 left-[6%] w-4 text-white/20 [animation-delay:-3s]" />
-        <div className="relative mx-auto grid grid-cols-[minmax(0,1fr)] max-w-6xl gap-14 px-6 md:grid-cols-12 md:items-stretch md:gap-x-16 md:gap-y-10 lg:gap-x-24">
-          <Reveal className="md:col-span-7">
-            <h2 className="type-hero font-serif font-medium italic">Vamos conversar sobre o que preocupa você?</h2>
-            <p className="mt-6 max-w-xl text-base font-light leading-relaxed text-white/85 md:text-lg">
-              Seja para cuidar da sua saúde ou da saúde do seu filho, estou aqui para ouvir, avaliar o caso e explicar
-              as possibilidades de acompanhamento ou tratamento.
-            </p>
-            <p className="mt-3 max-w-xl text-base font-medium text-white md:text-lg">
-              Clique no botão abaixo e agende sua consulta comigo em Salvador.
-            </p>
-            <div className="mt-9">
-              <CTAButton variant="light" size="lg" />
-            </div>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-white/70">
-              Minha equipe está disponível 24 horas por dia, todos os dias. Atendimento particular e por convênios,
-              mediante confirmação do plano.
-            </p>
-          </Reveal>
-
-          <Reveal delay={150} className="md:col-span-5 md:h-full">
-            <div className="relative mx-auto w-[82%] max-w-sm md:h-full md:w-full md:max-w-md">
-              <div className="absolute -bottom-4 -left-4 right-4 top-4 rounded-t-[999px] rounded-b-[2rem] border border-[#54A4D1]/70" />
-              <div className="relative aspect-[4/5] overflow-hidden md:aspect-auto md:h-full md:min-h-[28rem] rounded-t-[999px] rounded-b-[2rem] bg-[#173d5c] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.65)]">
-                <Photo
-                  src={IMAGES.final}
-                  className="object-[50%_12%]"
-                  alt="Dr. Alexandre Ziomkowski, urologista em Salvador"
-                  sizes="(min-width: 768px) 40vw, 82vw"
-                  hint="Foto acolhedora do Dr. Alexandre"
-                />
-              </div>
-            </div>
-          </Reveal>
+      <section id="contato" className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#21547C] pb-28 pt-24 text-white md:pb-16 md:pt-32">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <h2 className="font-serif type-section font-medium">
+            Vamos conversar sobre o que <span className="italic text-[#9ACBE8]">preocupa você?</span>
+          </h2>
+          <div className="mx-auto my-7 h-px w-24 bg-[#9ACBE8]" />
+          <p className="text-base leading-[1.7] text-white/85 md:text-lg">
+            Seja para cuidar da sua saúde ou da saúde do seu filho, estou aqui para ouvir, avaliar o caso e explicar as
+            possibilidades de acompanhamento ou tratamento.
+          </p>
+          <p className="mt-3 text-base font-medium text-white md:text-lg">
+            Clique no botão abaixo e agende sua consulta comigo em Salvador.
+          </p>
+          <div className="mt-9">
+            <CTAButton variant="green" />
+          </div>
+          <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-white/70">
+            Minha equipe está disponível 24 horas por dia, todos os dias. Atendimento particular e por convênios,
+            mediante confirmação do plano.
+          </p>
         </div>
 
-        <footer className="relative mx-auto mt-20 max-w-6xl border-t border-white/12 px-6 pt-8 text-center text-sm text-white/55">
-          © 2026 Dr. Alexandre Ziomkowski · CRM-BA 25959 | RQE 20028 · Urologia · Salvador - BA
+        <footer className="mx-auto mt-20 flex max-w-6xl flex-col items-center gap-5 border-t border-white/15 px-6 pt-8 text-center text-sm text-white/60">
+          <Image
+            src="/logo-negativo.svg"
+            alt="Alexandre Ziomkowski, cirurgia urológica"
+            width={1759}
+            height={418}
+            className="h-10 w-auto"
+          />
+          <span>© 2026 Dr. Alexandre Ziomkowski · CRM-BA 25959 | RQE 20028 · Urologia · Salvador - BA</span>
         </footer>
       </section>
     </main>

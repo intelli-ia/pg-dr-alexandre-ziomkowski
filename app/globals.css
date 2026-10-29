@@ -3,11 +3,6 @@
 @theme inline {
   --font-sans: var(--font-poppins);
   --font-serif: var(--font-lora);
-  --color-navy: #21547c;
-  --color-navy-deep: #173d5c;
-  --color-sky: #54a4d1;
-  --color-ice: #eef6fb;
-  --color-ink: #35516a;
 }
 
 html {
@@ -15,8 +10,8 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: var(--color-ink);
+  background: #EEF6FB;
+  color: #35516a;
   font-family: var(--font-poppins), system-ui, sans-serif;
 }
 
@@ -24,31 +19,22 @@ section[id] {
   scroll-margin-top: 80px;
 }
 
-::selection {
-  background: #54a4d1;
-  color: #fff;
-}
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #fff;
+  background: #EEF6FB;
 }
 ::-webkit-scrollbar-thumb {
   background: #54a4d1;
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #21547c;
+  background: #21547C;
 }
 
-/* Escala tipográfica fluida dos títulos */
-@utility type-hero {
-  font-size: clamp(2.375rem, 1.5rem + 3.6vw, 4rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
+/* Escala tipográfica dos títulos (fluida, para copys longas) */
 @utility type-section {
   font-size: clamp(1.875rem, 1.25rem + 2.2vw, 3rem);
   line-height: 1.12;
@@ -61,164 +47,41 @@ section[id] {
   text-wrap: balance;
 }
 @utility type-sub {
-  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
-  line-height: 1.18;
+  font-size: clamp(1.625rem, 1.2rem + 1.4vw, 2.25rem);
+  line-height: 1.15;
   text-wrap: balance;
 }
 
-/* Destaque em itálico com marca-texto azul */
-.hl {
-  font-style: italic;
-  background: linear-gradient(transparent 68%, rgb(84 164 209 / 0.38) 68%, rgb(84 164 209 / 0.38) 92%, transparent 92%);
-  padding: 0 0.08em;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
-/* Grão sutil para dar textura às seções escuras */
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.06;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
-/* Marquee de depoimentos */
+/* Loop contínuo dos depoimentos */
 .marquee-track {
-  animation: marquee 60s linear infinite;
+  animation: marquee 100s linear infinite;
   will-change: transform;
 }
-.marquee-reverse {
-  animation-direction: reverse;
+/* Pausa no hover só com mouse; no toque o hover "gruda" e interromperia o loop */
+@media (hover: hover) and (pointer: fine) {
+  .marquee-row:hover .marquee-track {
+    animation-play-state: paused;
+  }
 }
-.marquee-row:hover .marquee-track {
-  animation-play-state: paused;
+/* No toque o carrossel não captura gestos: o scroll da página segue livre */
+@media (pointer: coarse) {
+  .marquee-row {
+    pointer-events: none;
+    user-select: none;
+  }
 }
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-
-/* Brilho que varre o botão principal */
-.shine {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-.shine::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.35) 50%, transparent 65%);
-  transform: translateX(-120%);
-  animation: shine 4.5s ease-in-out infinite;
-}
-@keyframes shine {
-  0%, 55% { transform: translateX(-120%); }
-  100% { transform: translateX(120%); }
-}
-
-/* Flutuação e pulso */
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-@keyframes pulse-ring {
-  0% { transform: scale(1); opacity: 0.55; }
-  100% { transform: scale(1.7); opacity: 0; }
-}
-@keyframes drift {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(24px, -18px); }
-}
-.float-slow { animation: float-slow 7s ease-in-out infinite; }
-.pulse-ring::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: inherit;
-  z-index: -1;
-  animation: pulse-ring 2.4s ease-out infinite;
-}
-.drift { animation: drift 14s ease-in-out infinite; }
-
-/* Spotlight que segue o cursor nos cards */
-.spot {
-  position: relative;
-}
-.spot::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(84 164 209 / 0.18), transparent 60%);
-}
-.spot:hover::before {
-  opacity: 1;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track, .shine::before, .float-slow, .pulse-ring::before, .drift { animation: none; }
-}
-
-/* ===== Botões (CTAButton) ===== */
-@property --a {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-@keyframes spin-a {
-  to { --a: 360deg; }
-}
-@keyframes cta-shine {
-  0%, 60% { transform: translateX(-130%) skewX(-18deg); }
-  100% { transform: translateX(230%) skewX(-18deg); }
-}
-
-/* Brilho giratório na borda */
-.cta-ring::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.5px;
-  pointer-events: none;
-  background: conic-gradient(from var(--a), transparent 0 62%, rgb(255 255 255 / 0.95) 80%, transparent 96%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-  animation: spin-a 4.5s linear infinite;
-}
-.cta-ring-sky::after {
-  background: conic-gradient(from var(--a), transparent 0 62%, #54a4d1 80%, transparent 96%);
-}
-
-/* Spotlight que segue o mouse dentro do botão */
-.cta-spot {
-  opacity: 0;
-  transition: opacity 0.3s;
-  background: radial-gradient(130px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / 0.28), transparent 70%);
-}
-.cta:hover .cta-spot {
-  opacity: 1;
-}
-
-/* Faixa de luz que cruza o botão de tempos em tempos */
-.cta-shine::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  width: 35%;
-  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.35), transparent);
-  animation: cta-shine 5s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cta-ring::after, .cta-shine::before { animation: none; }
+  .marquee-track {
+    animation: none;
+  }
 }
