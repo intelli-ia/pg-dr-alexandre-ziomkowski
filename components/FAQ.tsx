@@ -3,8 +3,8 @@ import { useState } from "react";
 
 const faqs = [
   {
-    q: "Como marcar uma consulta com urologista em Salvador?",
-    a: "Clique no botão desta página para falar com minha equipe pelo WhatsApp. O atendimento está disponível 24 horas por dia, todos os dias, para esclarecer dúvidas e ajudar no agendamento.",
+    q: "Como marcar uma consulta com o Dr. Alexandre Ziomkowski?",
+    a: "Clique no botão desta página para falar com minha equipe pelo WhatsApp. A equipe esclarece dúvidas, confirma data, horário e local e ajuda no agendamento.",
   },
   {
     q: "Qual é o valor da consulta particular?",
@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     q: "O Dr. Alexandre atende por convênios?",
-    a: "Sim, além das consultas particulares, também atendo por convênios. Informe seu plano à equipe para confirmar a disponibilidade e o local de atendimento.",
+    a: "Sim, além das consultas particulares, também atendo por convênios, mas são convênios limitados. Minha equipe informa quais são e confirma a disponibilidade do seu plano e o local de atendimento pelo WhatsApp.",
   },
   {
     q: "O Dr. Alexandre também atende como urologista infantil?",

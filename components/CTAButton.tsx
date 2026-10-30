@@ -14,7 +14,7 @@ type Props = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full md:gap-2.5 text-center font-semibold leading-tight transition-colors duration-200 outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#54A4D1]";
+  "inline-flex items-center justify-center gap-2 rounded-full md:gap-2.5 text-center font-semibold leading-tight transition-all duration-200 outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#54A4D1]";
 
 const variants = {
   solid: "bg-[#21547C] text-white hover:bg-[#173d5c]",
@@ -39,11 +39,14 @@ export default function CTAButton({
   full = false,
 }: Props) {
   const iconSize = size === "sm" ? "h-4 w-4" : "h-4 w-4 md:h-5 md:w-5";
-  return (
+  // Botões que levam ao WhatsApp ganham a borda de laser girando; os demais só sobem no hover
+  const laser = href === WHATSAPP_URL;
+  const lift = "hover:-translate-y-0.5 hover:shadow-lg";
+  const button = (
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className={`${base} ${variants[variant]} ${sizes[size]} ${full ? "flex w-full" : "w-full sm:w-auto"}`}
+      className={`${base} ${variants[variant]} ${sizes[size]} ${full ? "flex w-full" : "w-full sm:w-auto"} ${laser ? "" : lift}`}
     >
       {icon === "whatsapp" && <WhatsAppIcon className={`${iconSize} shrink-0`} />}
       {label}
@@ -53,5 +56,17 @@ export default function CTAButton({
         </svg>
       )}
     </a>
+  );
+
+  if (!laser) return button;
+  return (
+    <span
+      className={`laser-border ${lift} ${full ? "flex w-full" : "flex w-full sm:inline-flex sm:w-auto"} ${
+        variant === "solid" ? "laser-on-light" : ""
+      }`}
+    >
+      <span className="laser-beam" aria-hidden />
+      {button}
+    </span>
   );
 }
