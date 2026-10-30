@@ -255,8 +255,7 @@ export default function Home() {
       {/* DOBRA 04 — ÁREAS DE ATUAÇÃO */}
       <section id="areas" className="relative -mt-16 overflow-hidden rounded-t-[4rem] bg-[#DDEBF5] pb-40 pt-20 md:pb-44 md:pt-28">
         <div className="mx-auto max-w-6xl px-6">
-          <Reveal className="mb-12 max-w-3xl text-center md:text-left">
-            <Eyebrow>Áreas de atuação</Eyebrow>
+          <div className="mb-12 max-w-3xl text-center md:text-left">
             <h2 className="font-serif type-section font-medium text-[#21547C]">
               Consultas e tratamentos urológicos para <span className="italic">adultos e crianças</span>
             </h2>
@@ -264,12 +263,12 @@ export default function Home() {
               Conheça algumas das questões que avalio e trato. A consulta permite entender seu caso e definir as
               possibilidades de acompanhamento ou tratamento.
             </p>
-          </Reveal>
+          </div>
           <div className="grid gap-6 md:grid-cols-6">
             {areas.map(([t, d, icon], i) => {
               const featured = i === 0;
               return (
-                <Reveal key={t} className={`h-full ${i < 2 ? "md:col-span-3" : "md:col-span-2"}`} delay={(i % 3) * 110}>
+                <div key={t} className={`h-full ${i < 2 ? "md:col-span-3" : "md:col-span-2"}`}>
                   <article
                     className={`relative h-full overflow-hidden rounded-3xl border p-8 text-center md:p-9 md:text-left ${
                       featured ? "border-[#21547C] bg-[#21547C] text-white" : "border-[#C5DAE9] bg-[#EEF6FB]"
@@ -293,13 +292,13 @@ export default function Home() {
                     <h3 className="relative mt-5 font-serif type-card font-medium">{t}</h3>
                     <p className={`relative mt-2 leading-relaxed ${featured ? "text-white/85" : "text-[#35516a]"}`}>{d}</p>
                   </article>
-                </Reveal>
+                </div>
               );
             })}
           </div>
-          <Reveal className="mt-12 text-center">
+          <div className="mt-12 text-center">
             <CTAButton />
-          </Reveal>
+          </div>
         </div>
       </section>
 
