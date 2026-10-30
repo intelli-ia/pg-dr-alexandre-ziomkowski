@@ -312,13 +312,13 @@ export default function Home() {
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div
             className="sticky top-0 h-screen bg-[length:320px_320px] opacity-[0.09] mix-blend-overlay blur-[4px]"
-            style={{ backgroundImage: "url(/textura-monograma.png)" }}
+            style={{ backgroundImage: "url(/textura-monograma.webp)" }}
           />
         </div>
         <div className="relative mx-auto max-w-6xl px-6">
           <Reveal className="mx-auto max-w-3xl text-center">
             <Image
-              src="/monograma-negativo.png"
+              src="/monograma-negativo.webp"
               alt=""
               aria-hidden
               width={2000}

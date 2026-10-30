@@ -15,7 +15,13 @@ const lora = Lora({
   style: ["normal", "italic"],
 });
 
+// Base das URLs absolutas (og:image etc.): SITE_URL, senão o domínio de produção da Vercel
+const SITE_URL =
+  process.env.SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Urologista em Salvador | Dr. Alexandre Ziomkowski",
   description:
     "Urologista em Salvador para adultos e crianças. Consulta particular e convênios. Da avaliação à cirurgia, quando indicada. Agende pelo WhatsApp.",

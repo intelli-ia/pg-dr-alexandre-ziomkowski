@@ -47,9 +47,8 @@ export const mapsEmbed = (query: string) =>
 export const IMAGES = {
   hero: "/foto-hero.webp",
   about: "/foto-sobre.webp",
-  clinic: "/foto-fachada.webp",
-  consultation: "/foto-consulta.jpg",
-  surgery: "/foto-cirurgia.jpg",
-  exam: "/foto-exame.jpg",
-  portrait: "/foto-retrato.jpg",
+  consultation: "/foto-consulta.webp",
+  surgery: "/foto-cirurgia.webp",
+  exam: "/foto-exame.webp",
+  portrait: "/foto-retrato.webp",
 };
