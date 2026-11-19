@@ -140,7 +140,7 @@ export default function Home() {
             </div>
 
             {/* Foto natural, sem máscara: fundo da hero no desktop (versão larga); bloco no topo, de ponta a ponta, no mobile (versão original, vertical) */}
-            <div className="relative order-1 -mx-6 aspect-[9/7] md:absolute md:inset-0 md:order-2 md:mx-0 md:mt-0 md:aspect-auto">
+            <div className="relative order-1 -mx-6 aspect-[11/8] md:absolute md:inset-0 md:order-2 md:mx-0 md:mt-0 md:aspect-auto">
               <picture>
                 <source media="(min-width: 768px)" srcSet={IMAGES.hero} />
                 <img
@@ -150,14 +150,15 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover object-[50%_12%] md:object-[80%_20%]"
                 />
               </picture>
-              <div className="absolute bottom-4 right-3 flex items-center gap-3 md:bottom-24 md:right-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))] md:gap-14">
+              {/* mobile: um badge em cada canto, em alturas diferentes; desktop: lado a lado na base */}
+              <div className="contents md:absolute md:bottom-24 md:right-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))] md:flex md:items-center md:gap-14">
                 {[
-                  ["CRM-BA", "25959"],
-                  ["RQE", "20028"],
-                ].map(([label, value]) => (
+                  ["CRM-BA", "25959", "left-3 bottom-[4.25rem]"],
+                  ["RQE", "20028", "right-3 bottom-5"],
+                ].map(([label, value, mobilePos]) => (
                   <div
                     key={label}
-                    className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/25 bg-[#0F2E45]/45 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-white backdrop-blur-md md:px-4 md:py-1.5 md:text-xs"
+                    className={`absolute md:static ${mobilePos} flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/25 bg-[#0F2E45]/45 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-white backdrop-blur-md md:px-4 md:py-1.5 md:text-xs`}
                   >
                     <span>{label}</span>
                     <span>{value}</span>
