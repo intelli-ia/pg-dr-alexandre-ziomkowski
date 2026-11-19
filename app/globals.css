@@ -155,3 +155,39 @@ section[id] {
   -webkit-text-stroke: 1.5px currentColor;
   color: transparent;
 }
+
+/* Botão dourado da hero: degradê, brilho pulsando e faixa de luz cruzando */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #f5d58a, #e9b25e 55%, #cf8f3a);
+  box-shadow: 0 10px 34px -6px rgba(233, 178, 94, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  animation: btn-glow 2.6s ease-in-out infinite;
+}
+.btn-gold:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+}
+.btn-gold::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.6) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: btn-shine 3.4s ease-in-out infinite;
+}
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 10px 34px -6px rgba(233, 178, 94, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
+  50% { box-shadow: 0 12px 48px -4px rgba(233, 178, 94, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
+}
+@keyframes btn-shine {
+  0%, 55% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-gold,
+  .btn-gold::after {
+    animation: none;
+  }
+}

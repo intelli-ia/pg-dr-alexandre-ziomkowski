@@ -45,6 +45,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" className={`${poppins.variable} ${lora.variable} antialiased`}>
       <head>
+        {/* conexões antecipadas com os domínios do Google Maps (mapas da seção de localização) */}
+        <link rel="preconnect" href="https://www.google.com" />
+        <link rel="preconnect" href="https://maps.googleapis.com" crossOrigin="" />
+        <link rel="preconnect" href="https://maps.gstatic.com" crossOrigin="" />
         {GTM_ID ? (
           <script
             dangerouslySetInnerHTML={{

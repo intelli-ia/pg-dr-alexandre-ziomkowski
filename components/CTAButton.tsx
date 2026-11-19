@@ -4,8 +4,8 @@ import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 type Props = {
   label?: string;
   href?: string;
-  /** solid: fundos claros · light: fundos escuros · outline: contorno, fundos escuros · green: WhatsApp */
-  variant?: "solid" | "light" | "outline" | "green";
+  /** solid: fundos claros · light: fundos escuros · outline: contorno, fundos escuros · green: WhatsApp · gold: destaque dourado com brilho (hero) */
+  variant?: "solid" | "light" | "outline" | "green" | "gold";
   size?: "sm" | "default";
   external?: boolean;
   icon?: "whatsapp" | "arrow" | "none";
@@ -21,12 +21,14 @@ const variants = {
   light: "bg-white text-[#21547C] hover:bg-[#DDEBF5]",
   outline: "border-2 border-[#9ACBE8] text-[#9ACBE8] hover:bg-[#9ACBE8] hover:text-[#173d5c]",
   green: "bg-[#25D366] text-[#0F2E45] hover:bg-[#1fb857]",
+  gold: "btn-gold uppercase tracking-[0.12em] text-[#0F2E45]",
 };
 
 const sizes = {
   default:
     "whitespace-nowrap px-4 py-3 text-[clamp(10px,calc((100vw-112px)/24),15px)] sm:px-6 sm:py-3.5 md:px-8 md:py-4 md:text-base",
   sm: "whitespace-nowrap px-5 py-2.5 text-sm",
+  gold: "w-full justify-between gap-4 whitespace-nowrap py-2 pl-7 pr-2 text-[13px] sm:w-auto sm:text-sm",
 };
 
 export default function CTAButton({
@@ -40,17 +42,25 @@ export default function CTAButton({
 }: Props) {
   const iconSize = size === "sm" ? "h-4 w-4" : "h-4 w-4 md:h-5 md:w-5";
   // Botões que levam ao WhatsApp ganham a borda de laser girando; os demais só sobem no hover
-  const laser = href === WHATSAPP_URL;
+  const gold = variant === "gold";
+  const laser = href === WHATSAPP_URL && !gold;
   const lift = "hover:-translate-y-0.5 hover:shadow-lg";
   const button = (
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className={`${base} ${variants[variant]} ${sizes[size]} ${full ? "flex w-full" : "w-full sm:w-auto"} ${laser ? "" : lift}`}
+      className={`${base} ${variants[variant]} ${gold ? sizes.gold : `${sizes[size]} ${full ? "flex w-full" : "w-full sm:w-auto"}`} ${laser || gold ? "" : lift}`}
     >
-      {icon === "whatsapp" && <WhatsAppIcon className={`${iconSize} shrink-0`} />}
+      {!gold && icon === "whatsapp" && <WhatsAppIcon className={`${iconSize} shrink-0`} />}
       {label}
-      {icon === "arrow" && (
+      {gold && (
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#173d5c] text-[#F5D58A]">
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+          </svg>
+        </span>
+      )}
+      {!gold && icon === "arrow" && (
         <svg className={`${iconSize} shrink-0`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
         </svg>

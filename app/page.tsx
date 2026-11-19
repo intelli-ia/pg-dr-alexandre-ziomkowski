@@ -3,23 +3,14 @@ import CTAButton from "@/components/CTAButton";
 import FAQ from "@/components/FAQ";
 import GoogleRating from "@/components/GoogleRating";
 import Header from "@/components/Header";
-import { Check, Icon, type IconName } from "@/components/Icons";
+import LazyMap from "@/components/LazyMap";
+import { Icon, type IconName } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import Roadmap from "@/components/Roadmap";
 import Testimonials from "@/components/Testimonials";
 import Texture from "@/components/Texture";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { IMAGES, LOCATIONS, mapsEmbed } from "@/lib/config";
-
-// `short` é a versão reduzida exibida só no mobile
-const heroHighlights: { text: string; short?: string }[] = [
-  { text: "Atendimento particular com preço justo." },
-  {
-    text: "Da consulta à cirurgia, quando indicada, com o mesmo médico.",
-    short: "Da consulta à cirurgia com o mesmo médico.",
-  },
-  { text: "Mais de 200 avaliações no Google e na Doctoralia." },
-];
 
 const areas: [string, string, IconName][] = [
   [
@@ -115,63 +106,59 @@ export default function Home() {
       <Header />
 
       {/* DOBRA 01 — HERO */}
-      <section id="hero" className="relative flex min-h-screen items-center overflow-hidden bg-[#21547C] text-white">
-        <Texture />
-        <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-6 pb-32 pt-8 md:grid-cols-12 md:items-stretch md:gap-x-16 md:gap-y-8 md:py-24">
-          <div className="order-first flex justify-center md:col-span-7 md:col-start-1 md:row-start-1 md:justify-start">
+      <section id="hero" className="relative flex min-h-screen flex-col overflow-hidden bg-[#efe7e1] text-[#0F2E45]">
+        <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 pt-8 md:pt-10">
+          <div className="relative z-10 flex justify-center md:justify-start">
             <Image
-              src="/logo-negativo.svg"
+              src="/logo-positivo.svg"
               alt="Alexandre Ziomkowski, cirurgia urológica"
               width={1759}
               height={418}
               className="h-11 w-auto md:h-14"
             />
           </div>
-          <div className="order-2 text-center md:order-1 md:col-span-7 md:col-start-1 md:row-start-2 md:text-left">
-            <h1 className="font-serif type-section font-medium max-md:mb-5 max-md:text-[2.5rem] max-md:leading-[1.08]">
-              Urologista em Salvador <span className="italic text-[#9ACBE8]">para adultos e crianças.</span>
-            </h1>
-            <div className="mx-auto my-6 hidden h-px w-24 bg-[#9ACBE8] md:mx-0 md:block" />
-            <h2 className="mx-auto max-w-xl text-base font-light leading-relaxed text-white/90 md:mx-0 md:text-lg">
-              Avalio seu caso, explico as opções de tratamento e, quando indicada, também realizo sua cirurgia. Você
-              pode seguir com o mesmo médico, da consulta ao tratamento cirúrgico.
-            </h2>
-            <ul className="mt-6 space-y-3">
-              {heroHighlights.map((h) => (
-                <li key={h.text} className="flex items-start justify-center gap-3 text-sm text-white/90 md:justify-start md:text-base">
-                  <Check className="mt-1 h-4 w-4 shrink-0 text-[#9ACBE8]" />
-                  {h.short ? (
-                    <>
-                      <span className="md:hidden">{h.short}</span>
-                      <span className="hidden md:inline">{h.text}</span>
-                    </>
-                  ) : (
-                    h.text
-                  )}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-9 grid gap-4 md:w-[90%]">
-              <CTAButton full variant="light" />
-              <CTAButton full variant="outline" label="Saiba mais" href="#depoimentos" external={false} icon="arrow" />
-            </div>
-            <p className="mt-6 text-xs tracking-wide text-white/70">CRM-BA 25959 · RQE 20028</p>
-          </div>
 
-          <div className="order-1 md:order-2 md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-1 md:h-full">
-            <div className="relative mx-auto w-[80%] max-w-sm md:h-full md:w-full md:max-w-md">
-              <div className="absolute -bottom-4 -right-4 left-4 top-4 rounded-[2rem] border border-[#9ACBE8]/60" />
-              <div className="relative aspect-square overflow-hidden rounded-[2rem] bg-[#173d5c] md:aspect-auto md:h-full md:min-h-[28rem]">
-                <Image
-                  src={IMAGES.hero}
-                  unoptimized
-                  alt="Dr. Alexandre Ziomkowski, urologista em Salvador, caminhando pelo corredor da clínica"
-                  fill
-                  preload
-                  fetchPriority="high"
-                  sizes="(min-width: 768px) 40vw, 80vw"
-                  className="object-cover object-[50%_50%]"
-                />
+          <div className="grid flex-1 md:grid-cols-12 md:items-center md:gap-x-6">
+            <div className="relative z-10 order-2 pb-32 pt-4 text-center md:order-1 md:col-span-7 md:py-16 md:pb-28 md:text-left">
+              <h1 className="font-serif type-section font-medium leading-[1.08] mb-5 md:mb-6 max-md:text-[3rem] md:max-w-[38rem] md:text-[3rem] lg:text-[4rem]">
+                Urologista em Salvador <span className="text-[#21547C]">para adultos e crianças.</span>
+              </h1>
+              <h2 className="mx-auto max-w-lg text-base font-medium leading-relaxed text-[#173d5c] md:mx-0 md:text-lg">
+                Avalio seu caso com atenção, explico as opções de tratamento e, quando indicada, também realizo sua cirurgia
+                urológica. Você acompanhado do início ao fim pelo mesmo profissional.
+              </h2>
+              <div className="mt-9 md:inline-block">
+                <CTAButton variant="gold" label="Agendar minha consulta" />
+              </div>
+            </div>
+
+            {/* Foto natural, sem máscara: fundo da hero no desktop; bloco no topo, de ponta a ponta, no mobile */}
+            <div className="relative order-1 -mx-6 mt-4 aspect-[4/3] md:absolute md:inset-0 md:order-2 md:mx-0 md:mt-0 md:aspect-auto">
+              <Image
+                src={IMAGES.hero}
+                unoptimized
+                alt="Dr. Alexandre Ziomkowski, urologista em Salvador, de jaleco e estetoscópio"
+                fill
+                preload
+                fetchPriority="high"
+                sizes="100vw"
+                className="object-cover object-[80%_20%]"
+              />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#efe7e1] to-transparent md:hidden" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#efe7e1] to-transparent md:hidden" />
+              <div className="absolute bottom-4 right-3 flex items-center gap-3 md:bottom-24 md:right-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))] md:gap-14">
+                {[
+                  ["CRM-BA", "25959"],
+                  ["RQE", "20028"],
+                ].map(([label, value]) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/25 bg-[#0F2E45]/45 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-white backdrop-blur-md md:px-4 md:py-1.5 md:text-xs"
+                  >
+                    <span>{label}</span>
+                    <span>{value}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -179,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* FAIXA DE CONFORTOS */}
-      <div className="relative z-10 -mt-14 bg-[linear-gradient(to_bottom,transparent_50%,#DDEBF5_50%)] px-4 md:px-6">
+      <div className="relative z-10 -mt-14 bg-[linear-gradient(to_bottom,transparent_3.5rem,#DDEBF5_3.5rem)] px-4 md:px-6">
         <div className="mx-auto grid max-w-5xl grid-cols-2 gap-y-8 rounded-[2rem] bg-white px-6 py-8 shadow-[0_30px_60px_-30px_rgba(33,84,124,0.45)] md:grid-cols-4 md:gap-y-0 md:px-4 md:py-10">
           {comforts.map((c, i) => (
             <div
@@ -398,12 +385,12 @@ export default function Home() {
               <div className="absolute -bottom-4 -right-4 left-4 top-4 rounded-[2rem] border border-[#3F8DBB]/60" />
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-[#21547C] md:aspect-auto md:h-full md:min-h-[28rem]">
                 <Image
-                  src={IMAGES.portrait}
+                  src={IMAGES.surgery}
                   unoptimized
-                  alt="Dr. Alexandre Ziomkowski, médico urologista, de jaleco e estetoscópio"
+                  alt="Dr. Alexandre Ziomkowski, médico urologista, no centro cirúrgico"
                   fill
                   sizes="(min-width: 768px) 40vw, 90vw"
-                  className="object-cover object-[50%_20%]"
+                  className="origin-[55%_25%] scale-[1.35] object-cover object-[50%_25%]"
                 />
               </div>
             </div>
@@ -482,21 +469,11 @@ export default function Home() {
                       </p>
                     </address>
                   </div>
-                  {/* o iframe é maior que o quadro e fica recortado: esconde o cartão "Ver mapa ampliado" e os créditos do Google */}
-                  <div
-                    className={`relative h-48 overflow-hidden rounded-2xl bg-[#173d5c] md:h-full md:min-h-[11rem] ${
-                      i % 2 === 1 ? "md:order-first" : ""
-                    }`}
-                  >
-                    <iframe
-                      title={`Mapa: ${loc.name}`}
-                      src={mapsEmbed(loc.query)}
-                      loading="lazy"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      tabIndex={-1}
-                      className="pointer-events-none absolute -top-28 left-0 h-[calc(100%+14rem)] w-full border-0"
-                    />
-                  </div>
+                  <LazyMap
+                    title={`Mapa: ${loc.name}`}
+                    src={mapsEmbed(loc.query)}
+                    className={`h-48 rounded-2xl md:h-full md:min-h-[11rem] ${i % 2 === 1 ? "md:order-first" : ""}`}
+                  />
                 </article>
               </div>
             ))}
