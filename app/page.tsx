@@ -107,8 +107,8 @@ export default function Home() {
 
       {/* DOBRA 01 — HERO */}
       <section id="hero" className="relative flex min-h-screen flex-col overflow-hidden bg-[#efe7e1] text-[#0F2E45]">
-        <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 pt-8 md:pt-10">
-          <div className="relative z-10 flex justify-center md:justify-start">
+        <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 md:pt-10">
+          <div className="relative z-10 hidden md:flex md:justify-start">
             <Image
               src="/logo-positivo.svg"
               alt="Alexandre Ziomkowski, cirurgia urológica"
@@ -120,7 +120,14 @@ export default function Home() {
 
           <div className="grid flex-1 md:grid-cols-12 md:items-center md:gap-x-6">
             <div className="relative z-10 order-2 pb-32 pt-4 text-center md:order-1 md:col-span-7 md:py-16 md:pb-28 md:text-left">
-              <h1 className="font-serif type-section font-medium leading-[1.08] mb-5 md:mb-6 max-md:text-[3rem] md:max-w-[38rem] md:text-[3rem] lg:text-[4rem]">
+              <Image
+                src="/logo-positivo.svg"
+                alt="Alexandre Ziomkowski, cirurgia urológica"
+                width={1759}
+                height={418}
+                className="mx-auto mb-5 h-9 w-auto md:hidden"
+              />
+              <h1 className="font-serif type-section font-medium leading-[1.08] mb-5 md:mb-6 max-md:text-[2.25rem] md:max-w-[38rem] md:text-[3rem] lg:text-[4rem]">
                 Urologista em Salvador <span className="text-[#21547C]">para adultos e crianças.</span>
               </h1>
               <h2 className="mx-auto max-w-lg text-base font-medium leading-relaxed text-[#173d5c] md:mx-0 md:text-lg">
@@ -132,20 +139,17 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Foto natural, sem máscara: fundo da hero no desktop; bloco no topo, de ponta a ponta, no mobile */}
-            <div className="relative order-1 -mx-6 mt-4 aspect-[4/3] md:absolute md:inset-0 md:order-2 md:mx-0 md:mt-0 md:aspect-auto">
-              <Image
-                src={IMAGES.hero}
-                unoptimized
-                alt="Dr. Alexandre Ziomkowski, urologista em Salvador, de jaleco e estetoscópio"
-                fill
-                preload
-                fetchPriority="high"
-                sizes="100vw"
-                className="object-cover object-[80%_20%]"
-              />
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#efe7e1] to-transparent md:hidden" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#efe7e1] to-transparent md:hidden" />
+            {/* Foto natural, sem máscara: fundo da hero no desktop (versão larga); bloco no topo, de ponta a ponta, no mobile (versão original, vertical) */}
+            <div className="relative order-1 -mx-6 aspect-[9/7] md:absolute md:inset-0 md:order-2 md:mx-0 md:mt-0 md:aspect-auto">
+              <picture>
+                <source media="(min-width: 768px)" srcSet={IMAGES.hero} />
+                <img
+                  src={IMAGES.heroMobile}
+                  alt="Dr. Alexandre Ziomkowski, urologista em Salvador, de jaleco e estetoscópio"
+                  fetchPriority="high"
+                  className="absolute inset-0 h-full w-full object-cover object-[50%_12%] md:object-[80%_20%]"
+                />
+              </picture>
               <div className="absolute bottom-4 right-3 flex items-center gap-3 md:bottom-24 md:right-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))] md:gap-14">
                 {[
                   ["CRM-BA", "25959"],

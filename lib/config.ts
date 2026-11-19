@@ -46,6 +46,7 @@ export const mapsEmbed = (query: string) =>
 
 export const IMAGES = {
   hero: "/foto-hero.webp",
+  heroMobile: "/foto-hero-mobile.webp",
   corridor: "/foto-corredor.webp",
   about: "/foto-sobre.webp",
   consultation: "/foto-consulta.webp",
